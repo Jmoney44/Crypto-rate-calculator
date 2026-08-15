@@ -192,6 +192,25 @@ function setupNavScroll() {
   });
 }
 
+// Mobile nav toggle
+function setupNavToggle() {
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
 // Init
 buildTicker();
 setupAssetTabs();
@@ -199,4 +218,5 @@ renderSubOptions();
 setupAmountInput();
 buildFAQ();
 setupNavScroll();
+setupNavToggle();
 updateWABtn('', '');
