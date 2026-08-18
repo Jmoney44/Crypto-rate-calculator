@@ -211,6 +211,18 @@ function setupNavToggle() {
   });
 }
 
+// Keep fixed nav height in sync so page content never sits under/away from it
+function syncNavHeight() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+  document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+}
+window.addEventListener('resize', syncNavHeight);
+window.addEventListener('orientationchange', syncNavHeight);
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(syncNavHeight);
+}
+
 // Init
 buildTicker();
 setupAssetTabs();
@@ -219,4 +231,5 @@ setupAmountInput();
 buildFAQ();
 setupNavScroll();
 setupNavToggle();
+syncNavHeight();
 updateWABtn('', '');

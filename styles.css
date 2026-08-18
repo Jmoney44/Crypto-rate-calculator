@@ -16,12 +16,20 @@
 
 html { scroll-behavior: smooth; }
 
+[id] { scroll-margin-top: var(--nav-h, 76px); }
+
 body {
   background: var(--navy);
   color: var(--white);
   font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
+  padding-top: var(--nav-h, 76px);
+}
+
+@media (max-width: 600px) {
+  body { padding-top: var(--nav-h, 64px); }
 }
 
 /* ── TICKER ── */
@@ -61,11 +69,15 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 18px 5%;
-  position: sticky;
+  padding-top: calc(18px + env(safe-area-inset-top));
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   background: rgba(10,15,30,0.92);
   backdrop-filter: blur(12px);
-  z-index: 100;
+  z-index: 1000;
   border-bottom: 1px solid var(--navy-border);
 }
 .logo {
